@@ -48,7 +48,7 @@ Questa piattaforma è composta da:
 
 1. Creare un ambiente virtuale nella directory del progetto:
 	
-	cd littleitaly
+	cd Ready2reserve_final
 	python -m venv venv
 	venv\Scripts\activate   #windows
 	source venv/bin/activate    #macOS/Linux
@@ -73,7 +73,7 @@ Questa piattaforma è composta da:
 ---  Struttura del progetto  ---
 
 
-little-italy_web_v1.0/
+Ready2reserve_final/
 │
 ├── backend/
 │   ├── app.py                <-- File principale del backend in Python         										
