@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Little Italy - Gestione Prenotazioni</title>
+  <meta name="description" content="Gestisci le tue prenotazioni">
+  <meta name="author" content="Matteo Vigliarolo">
+  
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700|Dancing+Script:400,700|Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Style CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  
+  <style>
+    .responsive-table {
+      width: 100%;
+      overflow-x: auto;
+    }
+    .responsive-table table {
+      width: 100%;
+      margin-bottom: 0;
+    }
+    @media (max-width: 768px) {
+      .responsive-table table {
+        font-size: 0.85em;
+      }
+      .modal-dialog {
+        width: 90%;
+        margin: 10px auto;
+      }
+    }
+  </style>
+</head>
+<body id="top" data-spy="scroll" data-target=".navbar-custom">
+  
+  <!-- Navigation -->
+  <nav id="site-nav" class="navbar navbar-custom navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
+          <span class="sr-only">Attiva/disattiva navigazione</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Little Italy</a>
+      </div>
+      <div class="collapse navbar-collapse" id="nav-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="booking.html">Prenota un tavolo</a></li>
+          <li><a href="management.html#manage-form">Gestisci la tua Prenotazione</a></li>
+          <li><a href="#contact-sec">Contatti</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Hero -->
+  <header id="hero" class="hero-section">
+    <div class="hero-overlay">
+      <div class="container">
+        <div class="hero-text text-center">
+          <h1 class="hero-title">Little Italy</h1>
+          <p class="hero-subtitle">Gestisci le tue prenotazioni in autonomia</p>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Management Form -->
+  <section id="manage-form" class="section management-section">
+>
+    <div class="container">
+      <h2 class="text-center">Gestione Prenotazioni</h2>
+      <hr class="section-divider">
+      <p class="text-center">Recupera la tua prenotazione utilizzando il codice e il numero di cellulare oppure inserendo i tuoi dati.</p>
+      
+      <!-- Form di recupero tramite codice e numero -->
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <h3>Recupera con Codice</h3>
+          <form id="retrieve-code-form">
+            <div class="form-group">
+              <label for="unique_code">Codice Prenotazione</label>
+              <input type="text" id="unique_code" name="unique_code" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="rc_phone">Numero di Cellulare</label>
+              <input type="tel" id="rc_phone" name="rc_phone" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Recupera Prenotazione</button>
+          </form>
+          <div id="retrieve-code-feedback" class="alert" style="margin-top:20px; display:none;"></div>
+        </div>
+      </div>
+      
+      <hr>
+      
+      <!-- Form di recupero tramite dati -->
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <h3>Recupera con Dati</h3>
+          <form id="retrieve-data-form">
+            <div class="form-group">
+              <label for="first_name">Nome</label>
+              <input type="text" id="first_name" name="first_name" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="last_name">Cognome</label>
+              <input type="text" id="last_name" name="last_name" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Numero di Telefono</label>
+              <input type="tel" id="phone" name="phone" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="booking_date">Data della Prenotazione</label>
+              <input type="date" id="booking_date" name="booking_date" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Recupera Prenotazione</button>
+          </form>
+          <div id="retrieve-data-feedback" class="alert" style="margin-top:20px; display:none;"></div>
+        </div>
+      </div>
+      
+      <!-- Area per visualizzare le prenotazioni recuperate -->
+      <div class="row" id="reservations-container" style="margin-top:20px;"></div>
+    </div>
+  </section>
+  
+  <!-- Modal per modificare la prenotazione -->
+  <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form id="update-form">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Chiudi">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="updateModalLabel">Modifica Prenotazione</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="update_service_type">Tipo di Servizio</label>
+              <select id="update_service_type" name="service_type" class="form-control" required>
+                <option value="pranzo">Pranzo (11:00 - 15:30)</option>
+                <option value="cena">Cena (18:00 - 22:30)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="update_booking_date">Data Prenotazione</label>
+              <input type="date" id="update_booking_date" name="booking_date" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="update_booking_time">Orario Prenotazione</label>
+              <input type="time" id="update_booking_time" name="booking_time" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="update_people">Numero di Persone</label>
+              <input type="number" id="update_people" name="people" class="form-control" min="1" max="15" required>
+            </div>
+            <input type="hidden" id="update_unique_code" name="unique_code">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+            <button type="submit" class="btn btn-primary">Salva Modifiche</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Contact -->
+  <section id="contact-sec" class="section contact-section">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-md-4">
+          <h3>Indirizzo</h3>
+          <p>Weissbadstrasse 2,<br> 9050 Appenzell</p>
+        </div>
+        <div class="col-md-4">
+          <h3>Orari</h3>
+          <p>Mar-Ven: 10:30 - 23:00<br> Sab-Dom: 10:30 - 00:00</p>
+        </div>
+        <div class="col-md-4">
+          <h3>Contatti</h3>
+          <p>Tel:  +41 76 368 35 32<br> Email: info@littleitaly.ch</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer id="site-footer" class="site-footer">
+    <div class="container text-center">
+      <div class="social-links">
+        <a href="https://www.instagram.com/littleitalyappenzell/" target="_blank">
+          <img src="img/instalogo.png" alt="Instagram">
+        </a>
+        <a href="#" target="_blank">
+          <img src="img/facelogo.png" alt="Facebook">
+        </a>
+      </div>
+      <div class="footer-logo">
+        <img src="img/logo_li.png" alt="Logo Little Italy">
+      </div>
+      <p>&copy; 2025 Little Italy. Tutti i diritti riservati.</p>
+    </div>
+  </footer>
+  
+  <!-- JS Scripts: jQuery e Bootstrap CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!--  JS esterno per la gestione delle operazioni -->
+  <script src="js/management.js"></script>
+</body>
+</html>
+

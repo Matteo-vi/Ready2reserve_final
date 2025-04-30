@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Little Italy - Prenotazione</title>
+  <meta name="description" content="Prenota il tuo tavolo">
+  <meta name="author" content="Matteo Vigliarolo">
+
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700|Dancing+Script:400,700|Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Style CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body id="top" data-spy="scroll" data-target=".navbar-custom">
+  <!-- Navigation -->
+  <nav id="site-nav" class="navbar navbar-custom navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
+          <span class="sr-only">Attiva/disattiva navigazione</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Little Italy</a>
+      </div>
+      <div class="collapse navbar-collapse" id="nav-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="booking.html">Prenota un tavolo</a></li>
+          <li><a href="management.html#manage-form">Gestisci la tua Prenotazione</a></li>
+          <li><a href="#contact-sec">Contatti</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Hero  -->
+  <header id="hero" class="hero-section">
+    <div class="hero-overlay">
+      <div class="container">
+        <div class="hero-text text-center">
+          <h1 class="hero-title">Little Italy</h1>
+          <p class="hero-subtitle">Prenota il tuo tavolo in un click</p>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Booking Form  -->
+  <section id="booking-form-sec" class="section booking-section">
+    <div class="container">
+      <h2 class="text-center">Nuova Prenotazione</h2>
+      <hr class="section-divider">
+      <form id="booking-form">
+        <div class="form-group">
+          <label for="first_name">Nome</label>
+          <input type="text" id="first_name" name="first_name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="last_name">Cognome</label>
+          <input type="text" id="last_name" name="last_name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Numero di Telefono</label>
+          <input type="tel" id="phone" name="phone" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email (opzionale)</label>
+          <input type="email" id="email" name="email" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="service_type">Tipo di Servizio</label>
+          <select id="service_type" name="service_type" class="form-control" required>
+            <option value="">Seleziona...</option>
+            <option value="pranzo">Pranzo (11:00 - 15:30)</option>
+            <option value="cena">Cena (18:00 - 22:30)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="people">Numero di Persone (max 15)</label>
+          <input type="number" id="people" name="people" class="form-control" min="1" max="15" required>
+        </div>
+        <div class="form-group">
+          <label for="booking_date">Data Prenotazione</label>
+          <input type="date" id="booking_date" name="booking_date" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="booking_time">Orario Prenotazione</label>
+          <input type="time" id="booking_time" name="booking_time" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="notes">Note (opzionali)</label>
+          <textarea id="notes" name="notes" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Invia Prenotazione</button>
+      </form>
+      <div id="booking-feedback" class="alert" style="margin-top:20px; display:none;"></div>
+    </div>
+  </section>
+    
+    
+      <!-- Contact -->
+      <section id="contact-sec" class="section contact-section">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-md-4">
+          <h3>Indirizzo</h3>
+          <p>Weissbadstrasse 2,<br> 9050 Appenzell</p>
+        </div>
+        <div class="col-md-4">
+          <h3>Orari</h3>
+          <p>Mar-Ven: 10:30 - 23:00<br> Sab-Dom: 10:30 - 00:00</p>
+        </div>
+        <div class="col-md-4">
+          <h3>Contatti</h3>
+          <p>Tel:  +41 76 368 35 32<br> Email: info@littleitaly.ch</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer id="site-footer" class="site-footer">
+    <div class="container text-center">
+      <div class="social-links">
+        <a href="https://www.instagram.com/littleitalyappenzell/" target="_blank">
+          <img src="img/instalogo.png" alt="Instagram">
+        </a>
+        <a href="#" target="_blank">
+          <img src="img/facelogo.png" alt="Facebook">
+        </a>
+      </div>
+      <div class="footer-logo">
+        <img src="img/logo_li.png" alt="Logo Little Italy">
+      </div>
+      <p>&copy; 2025 Little Italy. Tutti i diritti riservati.</p>
+    </div>
+  </footer>
+  
+  <!--  jQuery e Bootstrap da CDN -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- JS esterno -->
+  <script src="js/booking.js"></script>
+</body>
+</html>
